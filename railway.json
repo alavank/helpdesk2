@@ -1,4 +1,3 @@
-# Railway Configuration - Monorepo (Frontend + Backend)
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
