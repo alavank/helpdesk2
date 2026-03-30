@@ -51,12 +51,14 @@ app.use(routes);
 
 // Servir frontend em produção
 if (isProduction) {
-  const distPath = path.join(__dirname, '../../frontend/dist');
-  
+  // Caminho absoluto para o build do frontend
+  const distPath = process.env.FRONTEND_DIST_PATH || path.join(process.cwd(), 'frontend', 'dist');
+
   if (fs.existsSync(distPath)) {
+    console.log(`📦 Servindo frontend de: ${distPath}`);
     // Servir arquivos estáticos do frontend
     app.use(express.static(distPath));
-    
+
     // Para qualquer rota que não seja API, servir o index.html do frontend
     app.get('*', (req: Request, res: Response) => {
       if (!req.path.startsWith('/api')) {
@@ -66,7 +68,7 @@ if (isProduction) {
       }
     });
   } else {
-    console.warn('⚠️  Frontend build não encontrado. Rodando apenas API.');
+    console.warn(`⚠️ Frontend build não encontrado em: ${distPath}. Rodando apenas API.`);
   }
 }
 
