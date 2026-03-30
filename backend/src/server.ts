@@ -45,17 +45,9 @@ app.get('/health', (_req: Request, res: Response) => {
   });
 });
 
-// API Routes (serão implementadas incrementalmente)
-app.use('/api/v1/auth', require('./routes/auth.routes'));
-app.use('/api/v1/organizations', require('./routes/organizations.routes'));
-app.use('/api/v1/units', require('./routes/units.routes'));
-app.use('/api/v1/users', require('./routes/users.routes'));
-app.use('/api/v1/tickets', require('./routes/tickets.routes'));
-app.use('/api/v1/parameters', require('./routes/parameters.routes'));
-app.use('/api/v1/audit', require('./routes/audit.routes'));
-app.use('/api/v1/dashboard', require('./routes/dashboard.routes'));
-app.use('/api/v1/forms', require('./routes/forms.routes'));
-app.use('/api/v1/notifications', require('./routes/notifications.routes'));
+// API Routes
+import routes from './routes/index.js';
+app.use(routes);
 
 // Servir frontend em produção
 if (isProduction) {
